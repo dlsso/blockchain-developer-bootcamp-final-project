@@ -2,17 +2,16 @@
 pragma solidity >=0.4.21 <0.7.0;
 
 contract Puzzle {
-  hash hashedAnswer;
+  bytes32 hashedAnswer;
 
   event LogSolveAttempt(bool success);
 	
-	// Follows ConsenSys example. Find out difference between this and constructor.
-  constructor(answer) public payable {
-    hashedAnswer = keccak256(abi.encodePacked(answer));
+  constructor(bytes32 answerHash) public payable {
+    hashedAnswer = answerHash;
   }
 
-  function solve(answer) public returns (uint) {
-		if(keccak256(abi.encodePacked(answer)) == hashedAnswer){
+  function solve(string memory guess) public returns (bool) {
+		if(keccak256(abi.encodePacked(guess)) == hashedAnswer){
 			// Correct! Send contract value to solver
 			msg.sender.transfer(address(this).balance); // Upgrade to call?
 			emit LogSolveAttempt(true);
