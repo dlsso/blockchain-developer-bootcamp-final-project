@@ -11,11 +11,12 @@ contract PuzzleFactory {
 
     mapping(address => PuzzleInfo) puzzles;
 
-    event LogCreatedPuzzle(address indexed puzzleAddress, bool reward);
+    event LogCreatedPuzzle(address indexed puzzleAddress, uint reward);
 
-    function createPuzzle(string calldata answer) external payable {
-        // Should deploy Puzzle.sol to a new address and give it whatever value was sent      
-        newPuzzle = (new Puzzle{value: msg.value}(answer));
+    function createPuzzle(string calldata answer) external payable returns(address) {
+        bytes32 hashedAnswer = keccak256(abi.encodePacked(answer));
+        // Should deploy Puzzle.sol to a new address and give it whatever value was sent
+        Puzzle newPuzzle = (new Puzzle).value(msg.value)(hashedAnswer);
         // Planning to store puzzle data in IPFS or firestore. Feels like I should track at least the addresses on chain,
         // but not sure if I'll need anything else. If storing more I think it would work something like this.
         puzzles[address(newPuzzle)] = PuzzleInfo({
@@ -24,7 +25,7 @@ contract PuzzleFactory {
             solved: false
         });
         // Emit event for front end
-        emit LogCreatedPuzzle(address(newPuzzle), msg.value)
+        emit LogCreatedPuzzle(address(newPuzzle), msg.value);
         return address(newPuzzle);
     }
 
