@@ -22,3 +22,10 @@ Crypto enthusiasts like puzzles. Primary use would be just for fun. Could also b
 * Any way to prevent address generation brute force attacks? If not, encourage puzzles with an answer space large enough that brute forcing costs more than the reward.
   * More involved stretch goal: build calculator based on answer space, current gas price, and reward to inform user if puzzle is safe from brute forcing
 * May want to use revert code if too many attempts, to prevent gas loss
+
+
+### To get project running
+0. Run `npm install` in main dir, run `yarn install` in client dir
+1. Run `ganache-cli` from main dir
+2. In a new window run `truffle migrate --reset` from main dir
+3. Run `yarn start` from client dir
