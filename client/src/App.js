@@ -48,11 +48,18 @@ class App extends Component {
     this.setState({ storageValue: response });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    console.log('answer', form.answer.value)
+  };
+
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
+      <>
       <div className="App">
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
@@ -66,6 +73,39 @@ class App extends Component {
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
       </div>
+      <form onSubmit={this.handleSubmit}  id="create-puzzle-form">
+        <div>
+          <label>Puzzle</label>
+          <textarea
+            name="puzzle"
+            placeholder="Enter puzzle text"
+            required
+          />
+        </div>
+        <div>
+          <label>Anwser</label>
+          <input
+            type="text"
+            name="answer"
+            placeholder="The answer to the puzzle"
+            required
+          />
+        </div>
+        <div>
+          <label>Reward</label>
+          <input
+            type="number"
+            step="any"
+            name="reward"
+            placeholder="Reward amount in ETH"
+            required
+          />
+        </div>
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+      </>
     );
   }
 }
