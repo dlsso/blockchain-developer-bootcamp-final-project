@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@3id/connect": "^0.2.5",
+    "@ceramicnetwork/3id-did-resolver": "^1.4.12",
+    "@ceramicnetwork/http-client": "^1.5.3",
+    "@ceramicnetwork/stream-tile": "^1.5.3",
+    "dids": "^2.1.0",
+    "key-did-resolver": "^1.4.0",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-scripts": "3.2.0",

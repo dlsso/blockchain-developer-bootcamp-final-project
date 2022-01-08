@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import { CeramicClient } from '@ceramicnetwork/http-client';
+import KeyDidResolver from 'key-did-resolver';
+import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
+import { DID } from 'dids';
+import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
+import { TileDocument } from '@ceramicnetwork/stream-tile';
+
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 
@@ -6,6 +13,9 @@ import "./App.css";
 
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null };
+
+  streamId = '';
+  ceramic = {}
 
   componentDidMount = async () => {
     try {
@@ -33,25 +43,58 @@ class App extends Component {
       );
       console.error(error);
     }
+
+    // Ceramic
+    const API_URL = 'https://ceramic-clay.3boxlabs.com';
+    this.ceramic = new CeramicClient(API_URL);
+    const resolver = { ...KeyDidResolver.getResolver(),
+                       ...ThreeIdResolver.getResolver(this.ceramic) }
+    const did = new DID({ resolver });
+    this.ceramic.did = did;
+
+    // 3ID Connect
+    const addresses = await window.ethereum.enable();
+    const threeIdConnect = new ThreeIdConnect()
+    const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
+    await threeIdConnect.connect(authProvider);
+    const provider = await threeIdConnect.getDidProvider();
+    this.ceramic.did.setProvider(provider);
+    await this.ceramic.did.authenticate();
+
+    // const doc = await TileDocument.create(ceramic, ['puzzle1 text', 'puzzle2 text'], {}, {pin: true});
+    this.streamId = 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw';
+    const puzzles = await TileDocument.load(this.ceramic, this.streamId);
+    console.log('puzzles', puzzles.content);
+    // await puzzles.update(['puzzle1 text', 'puzzle2 text', 'new puzzle text'], {}, {pin: true});
+
   };
 
   runExample = async () => {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    // await contract.methods.set(5).send({ from: accounts[0] });
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    // // Get the value from the contract to prove it worked.
+    // const response = await contract.methods.get().call();
 
-    // Update state with the result.
-    this.setState({ storageValue: response });
+    // // Update state with the result.
+    // this.setState({ storageValue: response });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log('answer', form.answer.value)
+    let puzzleId = Math.floor(Math.random()*1e18); // swap for uuid
+    let puzzle = {
+      id: puzzleId,
+      description: form.puzzle.value,
+      reward: form.reward.value,
+    }
+    const doc = await TileDocument.load(this.ceramic, this.streamId);
+    const puzzles = doc.content;
+    puzzles.push(puzzle);
+    await doc.update(puzzles, {}, {pin: true}); // Updates the variable as well
   };
 
   render() {
