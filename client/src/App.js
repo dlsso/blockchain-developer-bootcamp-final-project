@@ -91,6 +91,12 @@ class App extends Component {
     await doc.update(puzzles, {}, {pin: true}); // Updates doc variable as well
     this.setState({ puzzles: doc.content });
     console.log('state puzzles', this.state.puzzles)
+
+    // Test sending answer to simple storage
+    const { accounts, contract } = this.state;
+    await contract.methods.set(form.answer.value).send({ from: accounts[0] });
+    const response = await contract.methods.get().call();
+    this.setState({ storageValue: response });
   }
 
   handleSubmit = async (e) => {
