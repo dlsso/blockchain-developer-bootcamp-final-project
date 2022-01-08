@@ -99,14 +99,7 @@ class App extends Component {
       reward: form.reward.value,
       solved: false,
     }
-    const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
-    const puzzles = doc.content;
-    puzzles.push(puzzle);
-    await doc.update(puzzles, {}, {pin: true}); // Updates doc variable as well
-    this.setState({ puzzles: doc.content });
-    console.log('state puzzles', this.state.puzzles)
-
-    // Test hitting puzzle factory and getting log
+    // Send to smart contract
     const { accounts, contract } = this.state;
     await contract.methods.createPuzzle(form.answer.value).send(
       {
@@ -114,6 +107,14 @@ class App extends Component {
         value: this.state.web3.utils.toWei(form.reward.value, "ether")
       }
     );
+    // Make sure puzzle list is fresh then add new one
+    const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
+    const puzzles = doc.content;
+    puzzles.push(puzzle);
+    await doc.update(puzzles, {}, {pin: true}); // Updates doc variable as well
+    this.setState({ puzzles: doc.content });
+    console.log('state puzzles', this.state.puzzles)
+
   }
 
   handleSubmit = async (e) => {
