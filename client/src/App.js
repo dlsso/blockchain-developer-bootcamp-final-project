@@ -7,6 +7,7 @@ import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
 
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import PuzzleFactory from "./contracts/PuzzleFactory.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
@@ -24,9 +25,9 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = PuzzleFactory.networks[networkId];
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
+        PuzzleFactory.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
@@ -59,10 +60,22 @@ class App extends Component {
     await ceramic.did.authenticate();
     this.setState({ ceramic: ceramic });
 
+    // Load puzzles
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     this.setState({ puzzles: doc.content });
-
     console.log('puzzles', this.state.puzzles);
+
+    // Listen for logs
+    this.state.contract.events.LogCreatedPuzzle(
+      {
+        // Example options
+        // fromBlock: 0,
+        // toBlock: 'latest'
+      },
+      function(err, event){
+        console.log('event', event);
+      }
+    );
   };
 
   runExample = async () => {
@@ -84,6 +97,7 @@ class App extends Component {
       id: puzzleId,
       description: form.puzzle.value,
       reward: form.reward.value,
+      solved: false,
     }
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     const puzzles = doc.content;
@@ -92,11 +106,14 @@ class App extends Component {
     this.setState({ puzzles: doc.content });
     console.log('state puzzles', this.state.puzzles)
 
-    // Test sending answer to simple storage
+    // Test hitting puzzle factory and getting log
     const { accounts, contract } = this.state;
-    await contract.methods.set(form.answer.value).send({ from: accounts[0] });
-    const response = await contract.methods.get().call();
-    this.setState({ storageValue: response });
+    await contract.methods.createPuzzle(form.answer.value).send(
+      {
+        from: accounts[0],
+        value: this.state.web3.utils.toWei(form.reward.value, "ether")
+      }
+    );
   }
 
   handleSubmit = async (e) => {
