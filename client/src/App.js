@@ -142,6 +142,7 @@ class App extends Component {
       </div>
       <form onSubmit={this.handleSubmit}  id="create-puzzle-form">
         <div>
+          <h2>Create a puzzle</h2>
           <label>Puzzle</label>
           <textarea
             name="puzzle"
@@ -172,6 +173,27 @@ class App extends Component {
           Submit
         </button>
       </form>
+      <div>
+        <h2>Puzzles</h2>
+          {this.state.puzzles ? this.state.puzzles.map(puzzle => (
+            <div key={puzzle.id} className='puzzle'>
+              <h3>Description</h3>
+              <div>{puzzle.description}</div>
+              <h3>Reward</h3>
+              <div>{puzzle.reward}</div>
+              <h3>Solve</h3>
+              <input
+                type="text"
+                name="answer"
+                placeholder="The answer to the puzzle"
+                required
+              />
+              <button type="submit">
+                Submit
+              </button>
+            </div>
+          )) : <h3>Loading...</h3>}
+      </div>
       </>
     );
   }
