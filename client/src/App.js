@@ -117,9 +117,15 @@ class App extends Component {
 
   }
 
-  handleSubmit = async (e) => {
+  handleSubmitPuzzle = async (e) => {
     e.preventDefault();
     this.submitPuzzle(e.target);
+  };
+
+  handleSubmitAnswer = async (e) => {
+    e.preventDefault();
+    console.log('sumbit', e.target.answer.value)
+    // this.submitAnswer( e.target.answer.value);
   };
 
   render() {
@@ -141,7 +147,7 @@ class App extends Component {
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
       </div>
-      <form onSubmit={this.handleSubmit}  id="create-puzzle-form">
+      <form onSubmit={this.handleSubmitPuzzle}  id="create-puzzle-form">
         <div>
           <h2>Create a puzzle</h2>
           <label>Puzzle</label>
@@ -171,7 +177,7 @@ class App extends Component {
           />
         </div>
         <button type="submit">
-          Submit
+          Create puzzle
         </button>
       </form>
       <div>
@@ -183,15 +189,17 @@ class App extends Component {
               <h3>Reward</h3>
               <div>{puzzle.reward}</div>
               <h3>Solve</h3>
-              <input
-                type="text"
-                name="answer"
-                placeholder="The answer to the puzzle"
-                required
-              />
-              <button type="submit">
-                Submit
-              </button>
+              <form onSubmit={this.handleSubmitAnswer}>
+                <input
+                  type="text"
+                  name="answer"
+                  placeholder="The answer to the puzzle"
+                  required
+                />
+                <button type="submit">
+                  Submit answer
+                </button>
+              </form>
             </div>
           )) : <h3>Loading...</h3>}
       </div>
