@@ -19,7 +19,6 @@ contract("Puzzle", accounts => {
   it("should reward the value of the contract when given the correct answer", async () => {
     const puzzleInstance = await Puzzle.at(puzzleAddress);
     const startingBalance = await web3.eth.getBalance(accounts[1])
-    console.log('startingBalance', startingBalance);
     const txInfo = await puzzleInstance.solve(42, { from: accounts[1]});
     const tx = await web3.eth.getTransaction(txInfo.tx);
     const gasPrice = toBN(tx.gasPrice);
@@ -28,5 +27,15 @@ contract("Puzzle", accounts => {
     const endingBalance = await web3.eth.getBalance(accounts[1])
     const addedEndingBalance = toBN(startingBalance).sub(gasCost).add(toBN(reward));
     assert.strictEqual(addedEndingBalance.toString(), toBN(endingBalance).toString());
+  });
+  it("should log success true when given the correct answer", async () => {
+    const puzzleInstance = await Puzzle.at(puzzleAddress);
+    const contractResponse = await puzzleInstance.solve(42, { from: accounts[1]});
+    assert.strictEqual(contractResponse.logs[0].args.success, true);
+  });
+  it("should log success false when given an incorrect answer", async () => {
+    const puzzleInstance = await Puzzle.at(puzzleAddress);
+    const contractResponse = await puzzleInstance.solve('wrong answer', { from: accounts[1]});
+    assert.strictEqual(contractResponse.logs[0].args.success, false);
   });
 });
