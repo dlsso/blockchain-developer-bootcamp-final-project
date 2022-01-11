@@ -13,16 +13,14 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}};
+  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}};
 
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = PuzzleFactory.networks[networkId];
@@ -30,10 +28,8 @@ class App extends Component {
         PuzzleFactory.abi,
         deployedNetwork && deployedNetwork.address,
       );
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      // Set web3, accounts, and contract in component state
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -64,31 +60,6 @@ class App extends Component {
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     this.setState({ puzzles: doc.content });
     console.log('puzzles', this.state.puzzles);
-
-    // Listen for logs
-    this.state.contract.events.LogCreatedPuzzle(
-      {
-        // Example options
-        // fromBlock: 0,
-        // toBlock: 'latest'
-      },
-      function(err, event){
-        console.log('event', event);
-      }
-    );
-  };
-
-  runExample = async () => {
-    const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-
-    // // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // // Update state with the result.
-    // this.setState({ storageValue: response });
   };
 
   submitPuzzle = async (form) => {
@@ -152,19 +123,6 @@ class App extends Component {
     }
     return (
       <>
-      <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 42</strong> of App.js.
-        </p>
-        <div>The stored value is: {this.state.storageValue}</div>
-      </div>
       <form onSubmit={this.handleSubmitPuzzle}  id="create-puzzle-form">
         <div>
           <h2>Create a puzzle</h2>
