@@ -6,8 +6,8 @@ import { DID } from 'dids';
 import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
 
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import PuzzleFactory from "./contracts/PuzzleFactory.json";
+import Puzzle from "./contracts/Puzzle.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
@@ -118,6 +118,24 @@ class App extends Component {
 
   }
 
+  submitAnswer = async (answer, puzzleAddress) => {
+    const { accounts, web3, ceramic, streamId } = this.state;
+    const puzzleContract = new web3.eth.Contract(Puzzle.abi, puzzleAddress);
+    const contractResponse = await puzzleContract.methods.solve(answer).send({from: accounts[0]});
+    const success = contractResponse.events.LogSolveAttempt.returnValues.success;
+    if (success){
+      // Mark puzzle as solved
+      const doc = await TileDocument.load(ceramic, streamId);
+      const puzzles = doc.content;
+      puzzles.find((puzzle) => puzzle.address === puzzleAddress).solved = true;
+      await doc.update(puzzles, {}, {pin: true});
+      this.setState({ puzzles: doc.content });
+      alert('Congratulations, you solved the puzzle!')
+    } else {
+      alert('Sorry, that was not the correct answer.')
+    }
+  }
+
   handleSubmitPuzzle = async (e) => {
     e.preventDefault();
     this.submitPuzzle(e.target);
@@ -125,7 +143,7 @@ class App extends Component {
 
   handleSubmitAnswer = async (e) => {
     e.preventDefault();
-    // this.submitAnswer( e.target.answer.value, e.target.getAttribute('address'));
+    this.submitAnswer(e.target.answer.value, e.target.getAttribute('address'));
   };
 
   render() {
@@ -188,18 +206,22 @@ class App extends Component {
               <div>{puzzle.description}</div>
               <h3>Reward</h3>
               <div>{puzzle.reward}</div>
-              <h3>Solve</h3>
-              <form onSubmit={this.handleSubmitAnswer} address={puzzle.address}>
-                <input
-                  type="text"
-                  name="answer"
-                  placeholder="The answer to the puzzle"
-                  required
-                />
-                <button type="submit">
-                  Submit answer
-                </button>
-              </form>
+              {puzzle.solved ? <h3>This puzzle has been solved!</h3> :
+              <>
+                <h3>Solve</h3>
+                <form onSubmit={this.handleSubmitAnswer} address={puzzle.address}>
+                  <input
+                    type="text"
+                    name="answer"
+                    placeholder="The answer to the puzzle"
+                    required
+                  />
+                  <button type="submit">
+                    Submit answer
+                  </button>
+                </form>
+              </>
+              }
             </div>
           )) : <h3>Loading...</h3>}
       </div>
