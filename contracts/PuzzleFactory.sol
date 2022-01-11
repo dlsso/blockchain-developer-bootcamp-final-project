@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.6.12;
 import "./Puzzle.sol";
 
-pragma solidity >=0.4.21 <0.7.0;
 
 contract PuzzleFactory {
     struct PuzzleInfo {
