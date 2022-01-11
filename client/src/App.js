@@ -92,22 +92,23 @@ class App extends Component {
   };
 
   submitPuzzle = async (form) => {
-    let puzzleId = Math.floor(Math.random()*1e18); // swap for uuid
-    let puzzle = {
-      id: puzzleId,
-      description: form.puzzle.value,
-      reward: form.reward.value,
-      solved: false,
-    }
-    // Send to smart contract
+    // Create puzzle on chain
     const { accounts, contract } = this.state;
-    await contract.methods.createPuzzle(form.answer.value).send(
+    const contractResponse = await contract.methods.createPuzzle(form.answer.value).send(
       {
         from: accounts[0],
         value: this.state.web3.utils.toWei(form.reward.value, "ether")
       }
     );
-    // Make sure puzzle list is fresh then add new one
+    // Build puzzle object
+    const puzzleAddress = contractResponse.events.LogCreatedPuzzle.returnValues.puzzleAddress;
+    const puzzle = {
+      address: puzzleAddress,
+      description: form.puzzle.value,
+      reward: form.reward.value,
+      solved: false,
+    }
+    // Make sure puzzle list is fresh then add the new one
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     const puzzles = doc.content;
     puzzles.push(puzzle);
@@ -124,8 +125,7 @@ class App extends Component {
 
   handleSubmitAnswer = async (e) => {
     e.preventDefault();
-    console.log('sumbit', e.target.answer.value)
-    // this.submitAnswer( e.target.answer.value);
+    // this.submitAnswer( e.target.answer.value, e.target.getAttribute('address'));
   };
 
   render() {
@@ -183,13 +183,13 @@ class App extends Component {
       <div>
         <h2>Puzzles</h2>
           {this.state.puzzles ? this.state.puzzles.map(puzzle => (
-            <div key={puzzle.id} className='puzzle'>
+            <div key={puzzle.address} className='puzzle'>
               <h3>Description</h3>
               <div>{puzzle.description}</div>
               <h3>Reward</h3>
               <div>{puzzle.reward}</div>
               <h3>Solve</h3>
-              <form onSubmit={this.handleSubmitAnswer}>
+              <form onSubmit={this.handleSubmitAnswer} address={puzzle.address}>
                 <input
                   type="text"
                   name="answer"
