@@ -13,9 +13,14 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}};
+  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: ''};
 
   componentDidMount = async () => {
+    const networks = {
+      '1': 'Mainnet',
+      '4': 'Rinkeby',
+      '1641947710321': 'Local testnet'
+    }
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -29,7 +34,7 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
       // Set web3, accounts, and contract in component state
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance, network: networks[networkId] });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -64,7 +69,7 @@ class App extends Component {
 
   submitPuzzle = async (form) => {
     // Create puzzle on chain
-    const { accounts, contract } = this.state;
+    const { accounts, contract, network } = this.state;
     const contractResponse = await contract.methods.createPuzzle(form.answer.value).send(
       {
         from: accounts[0],
@@ -75,6 +80,7 @@ class App extends Component {
     const puzzleAddress = contractResponse.events.LogCreatedPuzzle.returnValues.puzzleAddress;
     const puzzle = {
       address: puzzleAddress,
+      network: network,
       description: form.puzzle.value,
       reward: form.reward.value,
       solved: false,
@@ -164,7 +170,7 @@ class App extends Component {
               {this.state.puzzles ? this.state.puzzles.map(puzzle => (
                 <div key={puzzle.address} className={`puzzle ${puzzle.solved ? 'solved':'unsolved'}`}>
                   <div className="puzzle-group">
-                    <div className="puzzle-label">Puzzle</div>
+                    <div className="puzzle-label">Puzzle ({puzzle.network})</div>
                     <div>{puzzle.description}</div>
                   </div>
                   <div className="puzzle-group">
