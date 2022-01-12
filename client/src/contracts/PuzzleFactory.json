@@ -1,0 +1,1719 @@
+{
+  "contractName": "PuzzleFactory",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "puzzleAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogCreatedPuzzle",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "answer",
+          "type": "string"
+        }
+      ],
+      "name": "createPuzzle",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"puzzleAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"}],\"name\":\"LogCreatedPuzzle\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"answer\",\"type\":\"string\"}],\"name\":\"createPuzzle\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"dlsso\",\"events\":{\"LogCreatedPuzzle(address,uint256)\":{\"params\":{\"puzzleAddress\":\"The address of the created puzzle\",\"reward\":\"The amount of the reward in wei\"}}},\"kind\":\"dev\",\"methods\":{\"createPuzzle(string)\":{\"params\":{\"answer\":\"The answer to the puzzle\"},\"returns\":{\"_0\":\"The address of the new puzzle\"}}},\"title\":\"A puzzle creator\",\"version\":1},\"userdoc\":{\"events\":{\"LogCreatedPuzzle(address,uint256)\":{\"notice\":\"Logs the address and reward amount of the created puzzle\"}},\"kind\":\"user\",\"methods\":{\"createPuzzle(string)\":{\"notice\":\"Creates a puzzles with a reward of the value sent to it\"}},\"notice\":\"Creates a puzzles with a reward of the value sent to it\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/PuzzleFactory.sol\":\"PuzzleFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Puzzle.sol\":{\"keccak256\":\"0xc5595e61903028d3b6c10fe7d9f4aa61215a43b017b23d03c6d33f9c042f42e1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cfeaf7da145132b8a8fe497eb446b16232872420dbf2c61fbd8d108b91d08f29\",\"dweb:/ipfs/QmZbPhDow83t4T8kq7Ja9eKpcznVWUEqPjyHMG8LuWVKS2\"]},\"project:/contracts/PuzzleFactory.sol\":{\"keccak256\":\"0xe78ecadd33286d4ade59dac50387092014eae137dc71cef6b982580391945f55\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c35193ede8f70e4324ffcfeebd47e9436f3ec0a873a647e4945de17aca6a5d59\",\"dweb:/ipfs/QmV2sHaJd7RjFtmQK3VNHGgHX13TCUyEa9SM83MUpfGv2U\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610536806100206000396000f3fe60806040526004361061001e5760003560e01c80633c67b9e814610023575b600080fd5b61009a6004803603602081101561003957600080fd5b810190808035906020019064010000000081111561005657600080fd5b82018360208201111561006857600080fd5b8035906020019184600183028401116401000000008311171561008a57600080fd5b90919293919293905050506100c6565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60008083836040516020018083838082843780830192505050925050506040516020818303038152906040528051906020012090506000348260405161010b9061018e565b808281526020019150506040518091039082f0905080158015610132573d6000803e3d6000fd5b5090508073ffffffffffffffffffffffffffffffffffffffff167fc001301ad0bbbe1193704c6536ed36c1bb7e1fde32e9634998b5a121cc52966d346040518082815260200191505060405180910390a2809250505092915050565b6103658061019c8339019056fe60806040526040516103653803806103658339818101604052602081101561002657600080fd5b810190808051906020019092919050505080600081905550506103178061004e6000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806376fe1e9214610030575b600080fd5b6100e96004803603602081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610101565b60405180821515815260200191505060405180910390f35b60008054826040516020018082805190602001908083835b6020831061013c5780518252602082019150602081019050602083039250610119565b6001836020036101000a03801982511681845116808217855250505050505090500191505060405160208183030381529060405280519060200120141561029d5760003373ffffffffffffffffffffffffffffffffffffffff164760405180600001905060006040518083038185875af1925050503d80600081146101dd576040519150601f19603f3d011682016040523d82523d6000602084013e6101e2565b606091505b5050905080610259576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f4661696c656420746f2073656e6420726577617264000000000000000000000081525060200191505060405180910390fd5b7f5e3ac929e22fbde13b81612b73067d4e23e075be53bf8374f41c2db376c76067600160405180821515815260200191505060405180910390a160019150506102dc565b7f5e3ac929e22fbde13b81612b73067d4e23e075be53bf8374f41c2db376c76067600060405180821515815260200191505060405180910390a1600090505b91905056fea264697066735822122075c1e02690d0cde8052eec514fdf2742cc47b15e49bb62e9136007f3338722c564736f6c634300060c0033a26469706673582212207021342cc53e6f575413cd3d69338bfd03354d3bc8ccd8d47192cc81da05e05364736f6c634300060c0033",
+  "deployedBytecode": "0x60806040526004361061001e5760003560e01c80633c67b9e814610023575b600080fd5b61009a6004803603602081101561003957600080fd5b810190808035906020019064010000000081111561005657600080fd5b82018360208201111561006857600080fd5b8035906020019184600183028401116401000000008311171561008a57600080fd5b90919293919293905050506100c6565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60008083836040516020018083838082843780830192505050925050506040516020818303038152906040528051906020012090506000348260405161010b9061018e565b808281526020019150506040518091039082f0905080158015610132573d6000803e3d6000fd5b5090508073ffffffffffffffffffffffffffffffffffffffff167fc001301ad0bbbe1193704c6536ed36c1bb7e1fde32e9634998b5a121cc52966d346040518082815260200191505060405180910390a2809250505092915050565b6103658061019c8339019056fe60806040526040516103653803806103658339818101604052602081101561002657600080fd5b810190808051906020019092919050505080600081905550506103178061004e6000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806376fe1e9214610030575b600080fd5b6100e96004803603602081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610101565b60405180821515815260200191505060405180910390f35b60008054826040516020018082805190602001908083835b6020831061013c5780518252602082019150602081019050602083039250610119565b6001836020036101000a03801982511681845116808217855250505050505090500191505060405160208183030381529060405280519060200120141561029d5760003373ffffffffffffffffffffffffffffffffffffffff164760405180600001905060006040518083038185875af1925050503d80600081146101dd576040519150601f19603f3d011682016040523d82523d6000602084013e6101e2565b606091505b5050905080610259576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260158152602001807f4661696c656420746f2073656e6420726577617264000000000000000000000081525060200191505060405180910390fd5b7f5e3ac929e22fbde13b81612b73067d4e23e075be53bf8374f41c2db376c76067600160405180821515815260200191505060405180910390a160019150506102dc565b7f5e3ac929e22fbde13b81612b73067d4e23e075be53bf8374f41c2db376c76067600060405180821515815260200191505060405180910390a1600090505b91905056fea264697066735822122075c1e02690d0cde8052eec514fdf2742cc47b15e49bb62e9136007f3338722c564736f6c634300060c0033a26469706673582212207021342cc53e6f575413cd3d69338bfd03354d3bc8ccd8d47192cc81da05e05364736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "194:909:2:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "194:909:2:-:0;;;;;;;;;;;;;;;;;;;;;652:449;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;723:7;742:20;792:6;;775:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;765:35;;;;;;742:58;;899:16;937:9;948:12;918:43;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;899:62;;1037:9;1012:47;;;1049:9;1012:47;;;;;;;;;;;;;;;;;;1084:9;1069:25;;;;652:449;;;;:::o;-1:-1:-1:-;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity 0.6.12;\nimport \"./Puzzle.sol\";\n\n/// @title A puzzle creator\n/// @author dlsso\n/// @notice Creates a puzzles with a reward of the value sent to it\ncontract PuzzleFactory {\n\n    /// @notice Logs the address and reward amount of the created puzzle\n    /// @param puzzleAddress The address of the created puzzle\n    /// @param reward The amount of the reward in wei\n    event LogCreatedPuzzle(address indexed puzzleAddress, uint reward);\n\n    /// @notice Creates a puzzles with a reward of the value sent to it\n    /// @param answer The answer to the puzzle\n    /// @return The address of the new puzzle\n    function createPuzzle(string calldata answer) external payable returns(address) {\n        bytes32 hashedAnswer = keccak256(abi.encodePacked(answer));\n        // Should deploy Puzzle.sol to a new address and give it whatever value was sent\n        Puzzle newPuzzle = (new Puzzle).value(msg.value)(hashedAnswer);\n        // Emit event for front end\n        emit LogCreatedPuzzle(address(newPuzzle), msg.value);\n        return address(newPuzzle);\n    }\n}\n",
+  "sourcePath": "/home/john/bootcamp/blockchain-developer-bootcamp-final-project/contracts/PuzzleFactory.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/PuzzleFactory.sol",
+    "exportedSymbols": {
+      "PuzzleFactory": [
+        164
+      ]
+    },
+    "id": 165,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 110,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:2"
+      },
+      {
+        "absolutePath": "project:/contracts/Puzzle.sol",
+        "file": "./Puzzle.sol",
+        "id": 111,
+        "nodeType": "ImportDirective",
+        "scope": 165,
+        "sourceUnit": 109,
+        "src": "56:22:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [
+          108
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 112,
+          "nodeType": "StructuredDocumentation",
+          "src": "80:114:2",
+          "text": "@title A puzzle creator\n @author dlsso\n @notice Creates a puzzles with a reward of the value sent to it"
+        },
+        "fullyImplemented": true,
+        "id": 164,
+        "linearizedBaseContracts": [
+          164
+        ],
+        "name": "PuzzleFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": {
+              "id": 113,
+              "nodeType": "StructuredDocumentation",
+              "src": "224:185:2",
+              "text": "@notice Logs the address and reward amount of the created puzzle\n @param puzzleAddress The address of the created puzzle\n @param reward The amount of the reward in wei"
+            },
+            "id": 119,
+            "name": "LogCreatedPuzzle",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 118,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 115,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "puzzleAddress",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 119,
+                  "src": "437:29:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 114,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "437:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 117,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "reward",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 119,
+                  "src": "468:11:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 116,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "468:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "436:44:2"
+            },
+            "src": "414:67:2"
+          },
+          {
+            "body": {
+              "id": 162,
+              "nodeType": "Block",
+              "src": "732:369:2",
+              "statements": [
+                {
+                  "assignments": [
+                    128
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 128,
+                      "mutability": "mutable",
+                      "name": "hashedAnswer",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 162,
+                      "src": "742:20:2",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 127,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "742:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 135,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 132,
+                            "name": "answer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 122,
+                            "src": "792:6:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_calldata_ptr",
+                              "typeString": "string calldata"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_calldata_ptr",
+                              "typeString": "string calldata"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 130,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -1,
+                            "src": "775:3:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 131,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberName": "encodePacked",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "775:16:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function () pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 133,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "775:24:2",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "id": 129,
+                      "name": "keccak256",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -8,
+                      "src": "765:9:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                        "typeString": "function (bytes memory) pure returns (bytes32)"
+                      }
+                    },
+                    "id": 134,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "765:35:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "742:58:2"
+                },
+                {
+                  "assignments": [
+                    137
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 137,
+                      "mutability": "mutable",
+                      "name": "newPuzzle",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 162,
+                      "src": "899:16:2",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Puzzle_$108",
+                        "typeString": "contract Puzzle"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 136,
+                        "name": "Puzzle",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 108,
+                        "src": "899:6:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Puzzle_$108",
+                          "typeString": "contract Puzzle"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 147,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 145,
+                        "name": "hashedAnswer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 128,
+                        "src": "948:12:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 142,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "937:3:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 143,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "937:9:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "components": [
+                            {
+                              "argumentTypes": null,
+                              "id": 139,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "NewExpression",
+                              "src": "919:10:2",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_creation_payable$_t_bytes32_$returns$_t_contract$_Puzzle_$108_$",
+                                "typeString": "function (bytes32) payable returns (contract Puzzle)"
+                              },
+                              "typeName": {
+                                "contractScope": null,
+                                "id": 138,
+                                "name": "Puzzle",
+                                "nodeType": "UserDefinedTypeName",
+                                "referencedDeclaration": 108,
+                                "src": "923:6:2",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Puzzle_$108",
+                                  "typeString": "contract Puzzle"
+                                }
+                              }
+                            }
+                          ],
+                          "id": 140,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "918:12:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_payable$_t_bytes32_$returns$_t_contract$_Puzzle_$108_$",
+                            "typeString": "function (bytes32) payable returns (contract Puzzle)"
+                          }
+                        },
+                        "id": 141,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "918:18:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_setvalue_pure$_t_uint256_$returns$_t_function_creation_payable$_t_bytes32_$returns$_t_contract$_Puzzle_$108_$value_$",
+                          "typeString": "function (uint256) pure returns (function (bytes32) payable returns (contract Puzzle))"
+                        }
+                      },
+                      "id": 144,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "918:29:2",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_payable$_t_bytes32_$returns$_t_contract$_Puzzle_$108_$value",
+                        "typeString": "function (bytes32) payable returns (contract Puzzle)"
+                      }
+                    },
+                    "id": 146,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "918:43:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Puzzle_$108",
+                      "typeString": "contract Puzzle"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "899:62:2"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 151,
+                            "name": "newPuzzle",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 137,
+                            "src": "1037:9:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Puzzle_$108",
+                              "typeString": "contract Puzzle"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Puzzle_$108",
+                              "typeString": "contract Puzzle"
+                            }
+                          ],
+                          "id": 150,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1029:7:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 149,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1029:7:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": null,
+                              "typeString": null
+                            }
+                          }
+                        },
+                        "id": 152,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1029:18:2",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 153,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "1049:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 154,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1049:9:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 148,
+                      "name": "LogCreatedPuzzle",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 119,
+                      "src": "1012:16:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 155,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1012:47:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 156,
+                  "nodeType": "EmitStatement",
+                  "src": "1007:52:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 159,
+                        "name": "newPuzzle",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 137,
+                        "src": "1084:9:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Puzzle_$108",
+                          "typeString": "contract Puzzle"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_Puzzle_$108",
+                          "typeString": "contract Puzzle"
+                        }
+                      ],
+                      "id": 158,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1076:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 157,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1076:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": null,
+                          "typeString": null
+                        }
+                      }
+                    },
+                    "id": 160,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1076:18:2",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 126,
+                  "id": 161,
+                  "nodeType": "Return",
+                  "src": "1069:25:2"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 120,
+              "nodeType": "StructuredDocumentation",
+              "src": "487:160:2",
+              "text": "@notice Creates a puzzles with a reward of the value sent to it\n @param answer The answer to the puzzle\n @return The address of the new puzzle"
+            },
+            "functionSelector": "3c67b9e8",
+            "id": 163,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createPuzzle",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 123,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 122,
+                  "mutability": "mutable",
+                  "name": "answer",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 163,
+                  "src": "674:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 121,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "674:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "673:24:2"
+            },
+            "returnParameters": {
+              "id": 126,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 125,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 163,
+                  "src": "723:7:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 124,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "723:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "722:9:2"
+            },
+            "scope": 164,
+            "src": "652:449:2",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 165,
+        "src": "194:909:2"
+      }
+    ],
+    "src": "32:1072:2"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/PuzzleFactory.sol",
+      "exportedSymbols": {
+        "PuzzleFactory": [
+          164
+        ]
+      },
+      "license": "MIT"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.6",
+            ".12"
+          ]
+        },
+        "id": 110,
+        "name": "PragmaDirective",
+        "src": "32:23:2"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 109,
+          "absolutePath": "project:/contracts/Puzzle.sol",
+          "file": "./Puzzle.sol",
+          "scope": 165,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 111,
+        "name": "ImportDirective",
+        "src": "56:22:2"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            108
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            164
+          ],
+          "name": "PuzzleFactory",
+          "scope": 165
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": "@title A puzzle creator\n @author dlsso\n @notice Creates a puzzles with a reward of the value sent to it"
+            },
+            "id": 112,
+            "name": "StructuredDocumentation",
+            "src": "80:114:2"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "LogCreatedPuzzle"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "@notice Logs the address and reward amount of the created puzzle\n @param puzzleAddress The address of the created puzzle\n @param reward The amount of the reward in wei"
+                },
+                "id": 113,
+                "name": "StructuredDocumentation",
+                "src": "224:185:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "mutability": "mutable",
+                      "name": "puzzleAddress",
+                      "overrides": null,
+                      "scope": 119,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 114,
+                        "name": "ElementaryTypeName",
+                        "src": "437:7:2"
+                      }
+                    ],
+                    "id": 115,
+                    "name": "VariableDeclaration",
+                    "src": "437:29:2"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "mutability": "mutable",
+                      "name": "reward",
+                      "overrides": null,
+                      "scope": 119,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 116,
+                        "name": "ElementaryTypeName",
+                        "src": "468:4:2"
+                      }
+                    ],
+                    "id": 117,
+                    "name": "VariableDeclaration",
+                    "src": "468:11:2"
+                  }
+                ],
+                "id": 118,
+                "name": "ParameterList",
+                "src": "436:44:2"
+              }
+            ],
+            "id": 119,
+            "name": "EventDefinition",
+            "src": "414:67:2"
+          },
+          {
+            "attributes": {
+              "functionSelector": "3c67b9e8",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "createPuzzle",
+              "overrides": null,
+              "scope": 164,
+              "stateMutability": "payable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "@notice Creates a puzzles with a reward of the value sent to it\n @param answer The answer to the puzzle\n @return The address of the new puzzle"
+                },
+                "id": 120,
+                "name": "StructuredDocumentation",
+                "src": "487:160:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "answer",
+                      "overrides": null,
+                      "scope": 163,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 121,
+                        "name": "ElementaryTypeName",
+                        "src": "674:6:2"
+                      }
+                    ],
+                    "id": 122,
+                    "name": "VariableDeclaration",
+                    "src": "674:22:2"
+                  }
+                ],
+                "id": 123,
+                "name": "ParameterList",
+                "src": "673:24:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 163,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 124,
+                        "name": "ElementaryTypeName",
+                        "src": "723:7:2"
+                      }
+                    ],
+                    "id": 125,
+                    "name": "VariableDeclaration",
+                    "src": "723:7:2"
+                  }
+                ],
+                "id": 126,
+                "name": "ParameterList",
+                "src": "722:9:2"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "assignments": [
+                        128
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "mutability": "mutable",
+                          "name": "hashedAnswer",
+                          "overrides": null,
+                          "scope": 162,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "bytes32",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "bytes32",
+                              "type": "bytes32"
+                            },
+                            "id": 127,
+                            "name": "ElementaryTypeName",
+                            "src": "742:7:2"
+                          }
+                        ],
+                        "id": 128,
+                        "name": "VariableDeclaration",
+                        "src": "742:20:2"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "bytes32",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": -8,
+                              "type": "function (bytes memory) pure returns (bytes32)",
+                              "value": "keccak256"
+                            },
+                            "id": 129,
+                            "name": "Identifier",
+                            "src": "765:9:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "bytes memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_string_calldata_ptr",
+                                      "typeString": "string calldata"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "member_name": "encodePacked",
+                                  "referencedDeclaration": null,
+                                  "type": "function () pure returns (bytes memory)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -1,
+                                      "type": "abi",
+                                      "value": "abi"
+                                    },
+                                    "id": 130,
+                                    "name": "Identifier",
+                                    "src": "775:3:2"
+                                  }
+                                ],
+                                "id": 131,
+                                "name": "MemberAccess",
+                                "src": "775:16:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 122,
+                                  "type": "string calldata",
+                                  "value": "answer"
+                                },
+                                "id": 132,
+                                "name": "Identifier",
+                                "src": "792:6:2"
+                              }
+                            ],
+                            "id": 133,
+                            "name": "FunctionCall",
+                            "src": "775:24:2"
+                          }
+                        ],
+                        "id": 134,
+                        "name": "FunctionCall",
+                        "src": "765:35:2"
+                      }
+                    ],
+                    "id": 135,
+                    "name": "VariableDeclarationStatement",
+                    "src": "742:58:2"
+                  },
+                  {
+                    "attributes": {
+                      "assignments": [
+                        137
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "mutability": "mutable",
+                          "name": "newPuzzle",
+                          "overrides": null,
+                          "scope": 162,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "contract Puzzle",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "contractScope": null,
+                              "name": "Puzzle",
+                              "referencedDeclaration": 108,
+                              "type": "contract Puzzle"
+                            },
+                            "id": 136,
+                            "name": "UserDefinedTypeName",
+                            "src": "899:6:2"
+                          }
+                        ],
+                        "id": 137,
+                        "name": "VariableDeclaration",
+                        "src": "899:16:2"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "contract Puzzle",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "function (bytes32) payable returns (contract Puzzle)",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "value",
+                                  "referencedDeclaration": null,
+                                  "type": "function (uint256) pure returns (function (bytes32) payable returns (contract Puzzle))"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isInlineArray": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "type": "function (bytes32) payable returns (contract Puzzle)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "type": "function (bytes32) payable returns (contract Puzzle)"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "contractScope": null,
+                                              "name": "Puzzle",
+                                              "referencedDeclaration": 108,
+                                              "type": "contract Puzzle"
+                                            },
+                                            "id": 138,
+                                            "name": "UserDefinedTypeName",
+                                            "src": "923:6:2"
+                                          }
+                                        ],
+                                        "id": 139,
+                                        "name": "NewExpression",
+                                        "src": "919:10:2"
+                                      }
+                                    ],
+                                    "id": 140,
+                                    "name": "TupleExpression",
+                                    "src": "918:12:2"
+                                  }
+                                ],
+                                "id": 141,
+                                "name": "MemberAccess",
+                                "src": "918:18:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "value",
+                                  "referencedDeclaration": null,
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -15,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 142,
+                                    "name": "Identifier",
+                                    "src": "937:3:2"
+                                  }
+                                ],
+                                "id": 143,
+                                "name": "MemberAccess",
+                                "src": "937:9:2"
+                              }
+                            ],
+                            "id": 144,
+                            "name": "FunctionCall",
+                            "src": "918:29:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 128,
+                              "type": "bytes32",
+                              "value": "hashedAnswer"
+                            },
+                            "id": 145,
+                            "name": "Identifier",
+                            "src": "948:12:2"
+                          }
+                        ],
+                        "id": 146,
+                        "name": "FunctionCall",
+                        "src": "918:43:2"
+                      }
+                    ],
+                    "id": 147,
+                    "name": "VariableDeclarationStatement",
+                    "src": "899:62:2"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 119,
+                              "type": "function (address,uint256)",
+                              "value": "LogCreatedPuzzle"
+                            },
+                            "id": 148,
+                            "name": "Identifier",
+                            "src": "1012:16:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "address",
+                              "type_conversion": true
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_Puzzle_$108",
+                                      "typeString": "contract Puzzle"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "type": "type(address)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "name": "address",
+                                      "type": null
+                                    },
+                                    "id": 149,
+                                    "name": "ElementaryTypeName",
+                                    "src": "1029:7:2"
+                                  }
+                                ],
+                                "id": 150,
+                                "name": "ElementaryTypeNameExpression",
+                                "src": "1029:7:2"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 137,
+                                  "type": "contract Puzzle",
+                                  "value": "newPuzzle"
+                                },
+                                "id": 151,
+                                "name": "Identifier",
+                                "src": "1037:9:2"
+                              }
+                            ],
+                            "id": 152,
+                            "name": "FunctionCall",
+                            "src": "1029:18:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "value",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": -15,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 153,
+                                "name": "Identifier",
+                                "src": "1049:3:2"
+                              }
+                            ],
+                            "id": 154,
+                            "name": "MemberAccess",
+                            "src": "1049:9:2"
+                          }
+                        ],
+                        "id": 155,
+                        "name": "FunctionCall",
+                        "src": "1012:47:2"
+                      }
+                    ],
+                    "id": 156,
+                    "name": "EmitStatement",
+                    "src": "1007:52:2"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 126
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "address",
+                          "type_conversion": true
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Puzzle_$108",
+                                  "typeString": "contract Puzzle"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "type": "type(address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "address",
+                                  "type": null
+                                },
+                                "id": 157,
+                                "name": "ElementaryTypeName",
+                                "src": "1076:7:2"
+                              }
+                            ],
+                            "id": 158,
+                            "name": "ElementaryTypeNameExpression",
+                            "src": "1076:7:2"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 137,
+                              "type": "contract Puzzle",
+                              "value": "newPuzzle"
+                            },
+                            "id": 159,
+                            "name": "Identifier",
+                            "src": "1084:9:2"
+                          }
+                        ],
+                        "id": 160,
+                        "name": "FunctionCall",
+                        "src": "1076:18:2"
+                      }
+                    ],
+                    "id": 161,
+                    "name": "Return",
+                    "src": "1069:25:2"
+                  }
+                ],
+                "id": 162,
+                "name": "Block",
+                "src": "732:369:2"
+              }
+            ],
+            "id": 163,
+            "name": "FunctionDefinition",
+            "src": "652:449:2"
+          }
+        ],
+        "id": 164,
+        "name": "ContractDefinition",
+        "src": "194:909:2"
+      }
+    ],
+    "id": 165,
+    "name": "SourceUnit",
+    "src": "32:1072:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {
+    "4": {
+      "events": {},
+      "links": {},
+      "address": "0xF198B5D27bF0fAdC0dC83cE661dD0503e4a49272",
+      "transactionHash": "0x9c9885d75b3a3d8696aa5648355633ec465ab6837ed05365cef315e8fabdf85c"
+    },
+    "1641947710321": {
+      "events": {},
+      "links": {},
+      "address": "0x64e44EBa174527cE708cc1cEaFf1b2209D0a91de",
+      "transactionHash": "0x8729c672301dea690693749cc1c7caa5acdc0d332713c52e707243706d59ea87"
+    }
+  },
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2022-01-12T15:56:52.795Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "author": "dlsso",
+    "events": {
+      "LogCreatedPuzzle(address,uint256)": {
+        "params": {
+          "puzzleAddress": "The address of the created puzzle",
+          "reward": "The amount of the reward in wei"
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "createPuzzle(string)": {
+        "params": {
+          "answer": "The answer to the puzzle"
+        },
+        "returns": {
+          "_0": "The address of the new puzzle"
+        }
+      }
+    },
+    "title": "A puzzle creator",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "LogCreatedPuzzle(address,uint256)": {
+        "notice": "Logs the address and reward amount of the created puzzle"
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "createPuzzle(string)": {
+        "notice": "Creates a puzzles with a reward of the value sent to it"
+      }
+    },
+    "notice": "Creates a puzzles with a reward of the value sent to it",
+    "version": 1
+  }
+}
