@@ -123,65 +123,74 @@ class App extends Component {
     }
     return (
       <>
-      <form onSubmit={this.handleSubmitPuzzle}  id="create-puzzle-form">
-        <div>
-          <h2>Create a puzzle</h2>
-          <label>Puzzle</label>
-          <textarea
-            name="puzzle"
-            placeholder="Enter puzzle text"
-            required
-          />
+      <div id="header">Puzzle Rewards</div>
+      <div id="wrapper">
+        <div id="flex-wrapper">
+          <div id="create-puzzle">
+            <h2>Create a puzzle</h2>
+            <form onSubmit={this.handleSubmitPuzzle}  id="create-puzzle-form">
+              <label>Puzzle</label>
+              <textarea
+                name="puzzle"
+                placeholder="Enter puzzle text. Answer must be exact, so be precise!"
+                required
+              />
+              <div>
+                <label>Anwser</label>
+                <input
+                  type="text"
+                  name="answer"
+                  placeholder="The answer to the puzzle"
+                  required
+                />
+              </div>
+              <div>
+                <label>Reward</label>
+                <input
+                  type="number"
+                  step="any"
+                  name="reward"
+                  placeholder="Reward amount in ETH"
+                  required
+                />
+              </div>
+              <button type="submit">
+                Create puzzle
+              </button>
+            </form>
+          </div>
+          <div id="puzzles">
+            <h2>Puzzles</h2>
+              {this.state.puzzles ? this.state.puzzles.map(puzzle => (
+                <div key={puzzle.address} className={`puzzle ${puzzle.solved ? 'solved':'unsolved'}`}>
+                  <div className="puzzle-group">
+                    <div className="puzzle-label">Puzzle</div>
+                    <div>{puzzle.description}</div>
+                  </div>
+                  <div className="puzzle-group">
+                    <div className="puzzle-label">Reward</div>
+                    <div>{puzzle.reward} ETH</div>
+                  </div>
+                  {puzzle.solved ? <div className="puzzle-label">This puzzle has been solved!</div> :
+                  <>
+                    <div className="puzzle-label">Solve</div>
+                    <form onSubmit={this.handleSubmitAnswer} address={puzzle.address}>
+                      <input
+                        type="text"
+                        name="answer"
+                        placeholder="Answer, must be exact!"
+                        required
+                      />
+                      <button type="submit">
+                        Submit answer
+                      </button>
+                    </form>
+                  </>
+                  }
+                </div>
+              )) : <div className="puzzle-label">Loading...</div>}
+          </div>
         </div>
-        <div>
-          <label>Anwser</label>
-          <input
-            type="text"
-            name="answer"
-            placeholder="The answer to the puzzle"
-            required
-          />
-        </div>
-        <div>
-          <label>Reward</label>
-          <input
-            type="number"
-            step="any"
-            name="reward"
-            placeholder="Reward amount in ETH"
-            required
-          />
-        </div>
-        <button type="submit">
-          Create puzzle
-        </button>
-      </form>
-      <div>
-        <h2>Puzzles</h2>
-          {this.state.puzzles ? this.state.puzzles.map(puzzle => (
-            <div key={puzzle.address} className='puzzle'>
-              <h3>Description</h3>
-              <div>{puzzle.description}</div>
-              <h3>Reward</h3>
-              <div>{puzzle.reward}</div>
-              {puzzle.solved ? <h3>This puzzle has been solved!</h3> :
-              <>
-                <h3>Solve</h3>
-                <form onSubmit={this.handleSubmitAnswer} address={puzzle.address}>
-                  <input
-                    type="text"
-                    name="answer"
-                    placeholder="The answer to the puzzle"
-                    required
-                  />
-                  <button type="submit">
-                    Submit answer
-                  </button>
-                </form>
-              </>
-              }
-            </div>
-          )) : <h3>Loading...</h3>}
       </div>
       </>
     );
