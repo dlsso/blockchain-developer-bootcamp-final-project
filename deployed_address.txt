@@ -1,0 +1,3 @@
+Network: 4 (Rinkeby)
+Puzzle Factory Address: 0xF198B5D27bF0fAdC0dC83cE661dD0503e4a49272
+Puzzle addresses are generated when the factory deploys them
