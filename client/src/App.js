@@ -13,7 +13,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: ''};
+  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: '', submittingPuzzle: false};
 
   componentDidMount = async () => {
     const networks = {
@@ -70,6 +70,7 @@ class App extends Component {
   submitPuzzle = async (form) => {
     // Create puzzle on chain
     const { accounts, contract, network } = this.state;
+    this.setState({ submittingPuzzle: true })
     const contractResponse = await contract.methods.createPuzzle(form.answer.value).send(
       {
         from: accounts[0],
@@ -90,7 +91,7 @@ class App extends Component {
     const puzzles = doc.content;
     puzzles.push(puzzle);
     await doc.update(puzzles, {}, {pin: true}); // Updates doc variable as well
-    this.setState({ puzzles: doc.content });
+    this.setState({ puzzles: doc.content, submittingPuzzle: false });
     console.log('state puzzles', this.state.puzzles)
 
   }
@@ -160,8 +161,8 @@ class App extends Component {
                   required
                 />
               </div>
-              <button type="submit">
-                Create puzzle
+              <button type="submit" disabled={this.state.submittingPuzzle}>
+                {this.state.submittingPuzzle ? 'Pending...' : 'Create puzzle'}
               </button>
             </form>
           </div>
