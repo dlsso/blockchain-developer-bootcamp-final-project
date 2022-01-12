@@ -13,7 +13,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: '', submittingPuzzle: false};
+  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: '', submittingPuzzle: false, submittingAnswer: false};
 
   componentDidMount = async () => {
     const networks = {
@@ -70,7 +70,7 @@ class App extends Component {
   submitPuzzle = async (form) => {
     // Create puzzle on chain
     const { accounts, contract, network } = this.state;
-    this.setState({ submittingPuzzle: true })
+    this.setState({ submittingPuzzle: true });
     const contractResponse = await contract.methods.createPuzzle(form.answer.value).send(
       {
         from: accounts[0],
@@ -98,6 +98,7 @@ class App extends Component {
 
   submitAnswer = async (answer, puzzleAddress) => {
     const { accounts, web3, ceramic, streamId } = this.state;
+    this.setState({ submittingAnswer: true });
     const puzzleContract = new web3.eth.Contract(Puzzle.abi, puzzleAddress);
     const contractResponse = await puzzleContract.methods.solve(answer).send({from: accounts[0]});
     const success = contractResponse.events.LogSolveAttempt.returnValues.success;
@@ -112,6 +113,7 @@ class App extends Component {
     } else {
       alert('Sorry, that was not the correct answer.')
     }
+    this.setState({ submittingAnswer: false });
   }
 
   handleSubmitPuzzle = async (e) => {
@@ -188,8 +190,8 @@ class App extends Component {
                         placeholder="Answer, must be exact!"
                         required
                       />
-                      <button type="submit">
-                        Submit answer
+                      <button type="submit" disabled={this.state.submittingAnswer}>
+                        {this.state.submittingAnswer ? 'Pending...' : 'Submit answer'}
                       </button>
                     </form>
                   </>
