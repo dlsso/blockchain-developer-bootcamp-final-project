@@ -138,7 +138,7 @@ class App extends Component {
     }
     return (
       <>
-      <div id="header">Puzzle Rewards</div>
+      <div id="header">ETH Puzzles</div>
       <div id="wrapper">
         <div id="flex-wrapper">
           <div id="create-puzzle">

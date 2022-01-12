@@ -1,4 +1,4 @@
-# Puzzle Rewards
+# ETH Puzzles
 
 ## Readme checklist
 - [x] Describes the project
