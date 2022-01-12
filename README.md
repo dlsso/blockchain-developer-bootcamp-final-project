@@ -3,7 +3,7 @@
 ## Readme checklist
 - [x] Describes the project
 - [x] Describes the directory structure
-- [ ] Describes where the frontend project can be accessed
+- [x] Describes where the frontend project can be accessed
 - [x] Your public Ethereum account if you would like to receive your certification as an NFT (this is optional)
 - [x] Clear instructions on installing dependencies for your project
 - [x] Clear instructions on accessing or—if your project needs a server (not required)—running your project
@@ -18,6 +18,7 @@ This is the directory structure. The front end lives in `/client`
 
 
 ## Where front end can be accessd
+https://dlsso.github.io/blockchain-developer-bootcamp-final-project/
 
 ## Ethereum account to send NFT
 `0xBb88013DdA8095576230Ae446e4e5047Cf56Dade`
