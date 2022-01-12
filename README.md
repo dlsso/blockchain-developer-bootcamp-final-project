@@ -2,7 +2,7 @@
 
 ## Checklist
 - [x] Describes the project
-- [ ] Describes the directory structure
+- [x] Describes the directory structure
 - [ ] Describes where the frontend project can be accessed
 - [x] Your public Ethereum account if you would like to receive your certification as an NFT (this is optional)
 - [x] Clear instructions on installing dependencies for your project
@@ -12,6 +12,10 @@
 Allow users to post and solve puzzles with an ETH reward. Users can post a puzzle using the web interface and an associated smart contract will be created holding the ETH reward. Other users can submit an answer to the smart contract through the web interface. When the smart contract receives the correct answer it releases the funds to the sender.
 
 ## Directory structure
+This is the directory structure. The front end lives in `/client`
+
+![image](https://user-images.githubusercontent.com/6238782/149050375-66edf056-8b3b-4a2d-97ab-c2219de51e50.png)
+
 
 ## Where front end can be accessd
 
