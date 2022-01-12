@@ -1,6 +1,6 @@
 # Puzzle Rewards
 
-## Checklist
+## Readme checklist
 - [x] Describes the project
 - [x] Describes the directory structure
 - [ ] Describes where the frontend project can be accessed
