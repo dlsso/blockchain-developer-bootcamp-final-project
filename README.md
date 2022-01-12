@@ -1,11 +1,34 @@
 # Puzzle Rewards
 
-## Summary
-Allow users to post a puzzle with an ETH reward. The puzzle will be viewable on the web interface and an associated smart contract will be created holding the ETH reward. Allow other users to submit an answer to the smart contract through the web interface. When the smart contract receives the correct answer it releases the funds to the sender.
+## Checklist
+- [x] Describes the project, 
+- [ ] Describes the directory structure, 
+- [ ] Describes where the frontend project can be accessed
+- [x] Your public Ethereum account if you would like to receive your certification as an NFT (this is optional).
+- [ ] Clear instructions on installing dependencies for your project 
+- [ ] Clear instructions on accessing or—if your project needs a server (not required)—running your project
+- [x] Clear instructions on running your smart contract unit tests and which port a local testnet should be running on.
+## Project description
+Allow users to post and solve puzzles with an ETH reward. Users can post a puzzle using the web interface and an associated smart contract will be created holding the ETH reward. Other users can submit an answer to the smart contract through the web interface. When the smart contract receives the correct answer it releases the funds to the sender.
 
+## Directory structure
+
+## Where front end can be accessd
+
+## Ethereum account to send NFT
+`0xBb88013DdA8095576230Ae446e4e5047Cf56Dade`
+## Installing dependencies
+
+## Accessing or running your project
+
+## Running your smart contract unit tests and which port a local testnet should be running on
+Run `truffle test` from the project directory. Local testnet should be on port `8545`.
+
+
+
+# Orignal readme
 ## Use case
 Crypto enthusiasts like puzzles. Primary use would be just for fun. Could also be used as a recruiting tool. Ultimate stretch goal would be to create a system that allows puzzle creators to accept an answer of their choosing, allowing the platform to be used for general rewards (unsolved problems, content creation, etc.).
-
 ## Puzzle creation workflow
 1. User connects to MetaMask
 2. User enters puzzle text, answer, and reward, then submits. (Stretch goal: ability to add image)
