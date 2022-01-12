@@ -32,7 +32,7 @@ This is the directory structure. The front end lives in `/client`
 3. Run `yarn start` from client directory (many warnings will show, a side effect of the truffle react box not being up to date enough to play nice with my IPFS library)
 4. Open your browser, go to MetaMask, select Localhost 8545 as your network, do Import Account and paste the private key you copied earlier. You should see near 100 ETH.
 4. Navigate to `http://localhost:3000/`, you will see a 3ID Connect popup
-5. Click connect to existing ID and choose to link `did:3:kjzl…8dj8438vv`, signing any MetaMask request
+5. On the popup click connect to existing ID and choose to link `did:3:kjzl…8dj8438vv`, signing any MetaMask requests
 6. Congrats, you are now running the project and should see the create puzzle form and any existing puzzles!
 
 ## Running your smart contract unit tests and which port a local testnet should be running on
@@ -40,7 +40,7 @@ Run `truffle test` from the project directory. Local testnet should be on port `
 
 
 
-# Orignal readme
+# Project proposal (kept for reference)
 ## Use case
 Crypto enthusiasts like puzzles. Primary use would be just for fun. Could also be used as a recruiting tool. Ultimate stretch goal would be to create a system that allows puzzle creators to accept an answer of their choosing, allowing the platform to be used for general rewards (unsolved problems, content creation, etc.).
 ## Puzzle creation workflow
@@ -59,10 +59,3 @@ Crypto enthusiasts like puzzles. Primary use would be just for fun. Could also b
 * Any way to prevent address generation brute force attacks? If not, encourage puzzles with an answer space large enough that brute forcing costs more than the reward.
   * More involved stretch goal: build calculator based on answer space, current gas price, and reward to inform user if puzzle is safe from brute forcing
 * May want to use revert code if too many attempts, to prevent gas loss
-
-
-### To get project running
-0. Run `npm install` in main dir, run `yarn install` in client dir
-1. Run `ganache-cli` from main dir
-2. In a new window run `truffle migrate --reset` from main dir
-3. Run `yarn start` from client dir
