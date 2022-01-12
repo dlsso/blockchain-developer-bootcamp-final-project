@@ -1,13 +1,13 @@
 # Puzzle Rewards
 
 ## Checklist
-- [x] Describes the project, 
-- [ ] Describes the directory structure, 
+- [x] Describes the project
+- [ ] Describes the directory structure
 - [ ] Describes where the frontend project can be accessed
-- [x] Your public Ethereum account if you would like to receive your certification as an NFT (this is optional).
-- [ ] Clear instructions on installing dependencies for your project 
-- [ ] Clear instructions on accessing or—if your project needs a server (not required)—running your project
-- [x] Clear instructions on running your smart contract unit tests and which port a local testnet should be running on.
+- [x] Your public Ethereum account if you would like to receive your certification as an NFT (this is optional)
+- [x] Clear instructions on installing dependencies for your project
+- [x] Clear instructions on accessing or—if your project needs a server (not required)—running your project
+- [x] Clear instructions on running your smart contract unit tests and which port a local testnet should be running on
 ## Project description
 Allow users to post and solve puzzles with an ETH reward. Users can post a puzzle using the web interface and an associated smart contract will be created holding the ETH reward. Other users can submit an answer to the smart contract through the web interface. When the smart contract receives the correct answer it releases the funds to the sender.
 
@@ -18,8 +18,18 @@ Allow users to post and solve puzzles with an ETH reward. Users can post a puzzl
 ## Ethereum account to send NFT
 `0xBb88013DdA8095576230Ae446e4e5047Cf56Dade`
 ## Installing dependencies
+0. Requires `truffle`, `ganache-cli`, `yarn`, and MetaMask
+1. Navigate to `blockchain-developer-bootcamp-final-project/client` and `yarn install`
+
 
 ## Accessing or running your project
+1. Run `ganache-cli` from main directory, copy one of the private keys displayed to use later
+2. In a new window run `truffle migrate --reset` from main directory
+3. Run `yarn start` from client directory (many warnings will show, a side effect of the truffle react box not being up to date enough to play nice with my IPFS library)
+4. Open your browser, go to MetaMask, select Localhost 8545 as your network, do Import Account and paste the private key you copied earlier. You should see near 100 ETH.
+4. Navigate to `http://localhost:3000/`, you will see a 3ID Connect popup
+5. Click connect to existing ID and choose to link `did:3:kjzl…8dj8438vv`, signing any MetaMask request
+6. Congrats, you are now running the project and should see the create puzzle form and any existing puzzles!
 
 ## Running your smart contract unit tests and which port a local testnet should be running on
 Run `truffle test` from the project directory. Local testnet should be on port `8545`.
