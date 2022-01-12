@@ -1,11 +1,19 @@
 #header {
   background-color: #282c34;
-  min-height: 10vh;
+  min-height: calc(20px + 10vmin);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+#logo-wrap {
+  width: 100%;
+  margin: 0 2rem;
+  max-width: 1600px;
+}
+
+#logo {
+  height: calc(20px + 6vmin);
 }
 
 #wrapper {
@@ -17,7 +25,8 @@
   display: flex;
   max-width: 1600px;
   flex-grow: 1;
-  padding: 0 1rem;
+  padding: 0 2rem;
+  column-gap: calc(20px + 3vw);
 }
 
 label {
@@ -35,23 +44,34 @@ textarea {
 }
 
 input {
-  padding: .5em;
+  padding: .5rem;
   border: 1px solid #6176b4;
   border-radius: 4px;
   margin: 0 1em 1em 0;
+  height: 1rem;
+
 }
 
 button {
-  padding: .6em 1em;
-  border: 1px solid #6176b4;
-  background-color:#a4c4ff;
+  padding: 0 1em;
+  height: 2.1rem;
+  border: 1px solid black;
+  background-color:#444;
+  color: #ddd;
   border-radius: 6px;
-  font: inherit;
+  font-weight: bold;
+  font-size: .75em;
   cursor: pointer;
 }
 
 #create-puzzle {
   flex: 1;
+}
+
+#create-puzzle button {
+  border: 1px solid #6176b4;
+  background-color:#a4c4ff;
+  color: #282c34;
 }
 
 #puzzles {
@@ -64,12 +84,17 @@ button {
   border-radius: 5px;
 }
 
+.puzzle form {
+  display: flex;
+  align-items: flex-start;
+}
+
 .solved {
-  background-color: #d9ecda;
+  background-color: #d9ecdabb;
 }
 
 .unsolved {
-  background-color: #c5d6f3;
+  background-color: #c5d6f399;
 }
 
 .puzzle-group {

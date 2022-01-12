@@ -9,6 +9,7 @@ import { TileDocument } from '@ceramicnetwork/stream-tile';
 import PuzzleFactory from "./contracts/PuzzleFactory.json";
 import Puzzle from "./contracts/Puzzle.json";
 import getWeb3 from "./getWeb3";
+import logo from './logo.png';
 
 import "./App.css";
 
@@ -138,7 +139,11 @@ class App extends Component {
     }
     return (
       <>
-      <div id="header">ETH Puzzles</div>
+      <div id="header">
+        <div id="logo-wrap">
+          <img id="logo" src={logo} alt="Credit George Puthukkeril"></img>
+        </div>
+      </div>
       <div id="wrapper">
         <div id="flex-wrapper">
           <div id="create-puzzle">
