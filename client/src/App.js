@@ -13,14 +13,23 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null, streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw', ceramic: {}, network: '', submittingPuzzle: false, submittingAnswer: false};
+  state = {
+    accounts: null,
+    ceramic: {},
+    contract: null,
+    network: '',
+    streamId: 'kjzl6cwe1jw14a485qm0p99jacbst4gyifnmm46txejgat6218yekj19owbcbrw',
+    submittingAnswer: false,
+    submittingPuzzle: false,
+    web3: null,
+  };
 
   componentDidMount = async () => {
     const networks = {
       '1': 'Mainnet',
       '4': 'Rinkeby',
       '1641947710321': 'Local testnet'
-    }
+    };
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -47,13 +56,13 @@ class App extends Component {
     const API_URL = 'https://ceramic-clay.3boxlabs.com';
     const ceramic = new CeramicClient(API_URL);
     const resolver = { ...KeyDidResolver.getResolver(),
-                       ...ThreeIdResolver.getResolver(ceramic) }
+                       ...ThreeIdResolver.getResolver(ceramic) };
     const did = new DID({ resolver });
     ceramic.did = did;
 
     // 3ID Connect
     const addresses = await window.ethereum.enable();
-    const threeIdConnect = new ThreeIdConnect()
+    const threeIdConnect = new ThreeIdConnect();
     const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
     await threeIdConnect.connect(authProvider);
     const provider = await threeIdConnect.getDidProvider();
@@ -64,7 +73,6 @@ class App extends Component {
     // Load puzzles
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     this.setState({ puzzles: doc.content });
-    console.log('puzzles', this.state.puzzles);
   };
 
   submitPuzzle = async (form) => {
@@ -85,15 +93,13 @@ class App extends Component {
       description: form.puzzle.value,
       reward: form.reward.value,
       solved: false,
-    }
+    };
     // Make sure puzzle list is fresh then add the new one
     const doc = await TileDocument.load(this.state.ceramic, this.state.streamId);
     const puzzles = doc.content;
     puzzles.push(puzzle);
     await doc.update(puzzles, {}, {pin: true}); // Updates doc variable as well
     this.setState({ puzzles: doc.content, submittingPuzzle: false });
-    console.log('state puzzles', this.state.puzzles)
-
   }
 
   submitAnswer = async (answer, puzzleAddress) => {
@@ -109,9 +115,9 @@ class App extends Component {
       puzzles.find((puzzle) => puzzle.address === puzzleAddress).solved = true;
       await doc.update(puzzles, {}, {pin: true});
       this.setState({ puzzles: doc.content });
-      alert('Congratulations, you solved the puzzle!')
+      alert('Congratulations, you solved the puzzle!');
     } else {
-      alert('Sorry, that was not the correct answer.')
+      alert('Sorry, that was not the correct answer.');
     }
     this.setState({ submittingAnswer: false });
   }
