@@ -104,23 +104,32 @@ class App extends Component {
   }
 
   submitAnswer = async (answer, puzzleAddress) => {
-    const { accounts, web3, ceramic, streamId } = this.state;
-    this.setState({ submittingAnswer: true });
+    const { accounts, web3, ceramic, streamId, puzzles } = this.state;
+    // Let app know request is pending
+    const thisPuzzle = puzzles.find((puzzle) => puzzle.address === puzzleAddress);
+    thisPuzzle.submittingAnswer = true;
+    this.setState({ puzzles: puzzles });
+    // Send solve attempt
     const puzzleContract = new web3.eth.Contract(Puzzle.abi, puzzleAddress);
-    const contractResponse = await puzzleContract.methods.solve(answer).send({from: accounts[0]});
-    const success = contractResponse.events.LogSolveAttempt.returnValues.success;
-    if (success){
-      // Mark puzzle as solved
-      const doc = await TileDocument.load(ceramic, streamId);
-      const puzzles = doc.content;
-      puzzles.find((puzzle) => puzzle.address === puzzleAddress).solved = true;
-      await doc.update(puzzles, {}, {pin: true});
-      this.setState({ puzzles: doc.content });
-      alert('Congratulations, you solved the puzzle!');
-    } else {
-      alert('Sorry, that was not the correct answer.');
+    try {
+      const contractResponse = await puzzleContract.methods.solve(answer).send({from: accounts[0]});
+      const success = contractResponse.events.LogSolveAttempt.returnValues.success;
+      if (success){
+        // Mark puzzle as solved
+        const doc = await TileDocument.load(ceramic, streamId);
+        const freshPuzzles = doc.content;
+        freshPuzzles.find((puzzle) => puzzle.address === puzzleAddress).solved = true;
+        await doc.update(freshPuzzles, {}, {pin: true});
+        this.setState({ puzzles: doc.content });
+        alert('Congratulations, you solved the puzzle!');
+      } else {
+        alert('Sorry, that was not the correct answer.');
+      }
+    } catch (error) {
+      alert(`Error: ${error.message}`);
     }
-    this.setState({ submittingAnswer: false });
+    thisPuzzle.submittingAnswer = false;
+    this.setState({ puzzles: puzzles });
   }
 
   handleSubmitPuzzle = async (e) => {
@@ -201,8 +210,8 @@ class App extends Component {
                         placeholder="Answer, must be exact!"
                         required
                       />
-                      <button type="submit" disabled={this.state.submittingAnswer}>
-                        {this.state.submittingAnswer ? 'Pending...' : 'Submit answer'}
+                      <button type="submit" disabled={puzzle.submittingAnswer}>
+                        {puzzle.submittingAnswer ? 'Pending...' : 'Submit answer'}
                       </button>
                     </form>
                   </>
