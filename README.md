@@ -8,6 +8,7 @@
 - [x] Clear instructions on installing dependencies for your project
 - [x] Clear instructions on accessing or—if your project needs a server (not required)—running your project
 - [x] Clear instructions on running your smart contract unit tests and which port a local testnet should be running on
+- [x] Link to video walkthrough
 ## Project description
 Allow users to post and solve puzzles with an ETH reward. Users can post a puzzle using the web interface and an associated smart contract will be created holding the ETH reward. Other users can submit an answer to the smart contract through the web interface. When the smart contract receives the correct answer it releases the funds to the sender.
 
@@ -39,6 +40,8 @@ https://dlsso.github.io/blockchain-developer-bootcamp-final-project/
 ## Running your smart contract unit tests and which port a local testnet should be running on
 Run `truffle test` from the project directory. Local testnet should be on port `8545`.
 
+## Link to video walkthrough
+https://www.loom.com/share/926fe14aa01247efa3f19c2ddeadc2da
 
 
 # Project proposal (kept for reference)
