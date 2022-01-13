@@ -123,13 +123,15 @@ class App extends Component {
         this.setState({ puzzles: doc.content });
         alert('Congratulations, you solved the puzzle!');
       } else {
+        thisPuzzle.submittingAnswer = false;
+        this.setState({ puzzles: puzzles });
         alert('Sorry, that was not the correct answer.');
       }
     } catch (error) {
+      thisPuzzle.submittingAnswer = false;
+      this.setState({ puzzles: puzzles });
       alert(`Error: ${error.message}`);
     }
-    thisPuzzle.submittingAnswer = false;
-    this.setState({ puzzles: puzzles });
   }
 
   handleSubmitPuzzle = async (e) => {
