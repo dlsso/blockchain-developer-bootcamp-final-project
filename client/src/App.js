@@ -195,7 +195,7 @@ class App extends Component {
               {this.state.puzzles ? this.state.puzzles.map(puzzle => (
                 <div key={puzzle.address} className={`puzzle ${puzzle.solved ? 'solved':'unsolved'}`}>
                   <div className="puzzle-group">
-                    <div className="puzzle-label">Puzzle ({puzzle.network})</div>
+                    <div className="puzzle-label">Puzzle ({puzzle.network || 'Unknown testnet'})</div>
                     <div>{puzzle.description}</div>
                   </div>
                   <div className="puzzle-group">
