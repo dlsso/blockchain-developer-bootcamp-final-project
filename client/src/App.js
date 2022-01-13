@@ -167,7 +167,7 @@ class App extends Component {
                 required
               />
               <div>
-                <label>Anwser</label>
+                <label>Answer</label>
                 <input
                   type="text"
                   name="answer"
